@@ -1,9 +1,12 @@
 class UserMailer < ApplicationMailer
-    default from: 'trouvetatable@gmail.com'
+    default from: 'trouvetatable@yopmail.com'
 
     def welcome_email(user)
-        @user = user
-        @url  = 'http://localhost:3001/login'
-        mail(to: @user.email, subject: 'Welcome to TrouveTaTable !')
-      end
+      @user = user
+      mail(
+        to: @user.email,
+        subject: 'Welcome to the Trouvetatable',
+      )
+    end
 end
+  
