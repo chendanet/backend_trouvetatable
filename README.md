@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-#backend_trouvetatable
-=======
+
 # README
 La team TTT
 
@@ -26,4 +24,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
->>>>>>> master
+
