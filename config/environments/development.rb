@@ -6,7 +6,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
 
-  config.action_mailer.delivery_method = :mailjet_api
+  config.action_mailer.delivery_method = :mailjet
 #la ligne avec perform_deliveries = true permet d'éteindre (en la passant à false) tout envoi d'email de la part de ton app Rails.
 
   # In the development environment your application's code is reloaded any time
