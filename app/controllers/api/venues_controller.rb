@@ -1,4 +1,4 @@
-class VenuesController < ApplicationController
+class Api::VenuesController < Api::BaseController
   before_action :set_venue, only: [:show, :update, :destroy]
 
   # GET /venues
