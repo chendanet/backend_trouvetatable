@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :null_session
   
   def render_jsonapi_response(resource)
