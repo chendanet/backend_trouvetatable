@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::API
-    def render_jsonapi_response(resource)
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  
+  def render_jsonapi_response(resource)
         if resource.errors.empty?
           render jsonapi: resource
         else
@@ -11,9 +14,9 @@ class ApplicationController < ActionController::API
 
 		def configure_permitted_parameters
 
-			devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, :is_manager )}
+			devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, keys: [:is_manager] )}
 
-			devise_paramater_sanitizer.permit(:account_update) { |u| u.permit( :email, :password, :is_manager, :first_name, :last_name)}
+			devise_paramater_sanitizer.permit(:account_update) { |u| u.permit( :email, :password, :first_name, :last_name)}
 
 		end
 end
