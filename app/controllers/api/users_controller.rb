@@ -1,6 +1,6 @@
 class Api::UsersController < Api::BaseController
-    before_action :find_user, only: [:show, :update]
-    before_action :authenticate_user!, except: [:show, :index]   
+    # before_action :find_user, only: [:show, :update]
+    # before_action :authenticate_user!, except: [:show, :index]   
 
     def create
         avatar = params[:pdf]
@@ -48,6 +48,6 @@ class Api::UsersController < Api::BaseController
     end
 
     def user_params
-        params.require(:user).permit(:email, :password, :pdf)
+        params.require(:user).permit(:email, :password, :first_name, :last_name), 
     end
 end
