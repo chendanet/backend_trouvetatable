@@ -7,4 +7,9 @@ class RegistrationsController < Devise::RegistrationsController
   
       render_jsonapi_response(resource)
     end
+
+    def sign_up_params
+      params.require(:user).permit(:email, :password, :first_name, :last_name, :is_manager)
+    end
+  
 end
