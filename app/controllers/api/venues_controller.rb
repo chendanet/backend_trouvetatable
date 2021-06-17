@@ -15,9 +15,9 @@ class Api::VenuesController < Api::BaseController
 
   # POST /venues
   def create
-    @venue = Venue.new(venue_params)
+    @venue = Venue.new() #venue_params
     
-    @venue.images.attach(property_params[:images])
+    @venue.images.attach(venue_params[:images])
 
     if @venue.save
       render json: @venue, status: :created, location: @venue
