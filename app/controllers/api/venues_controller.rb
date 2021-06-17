@@ -16,6 +16,8 @@ class Api::VenuesController < Api::BaseController
   # POST /venues
   def create
     @venue = Venue.new(venue_params)
+    
+    @venue.images.attach(property_params[:images])
 
     if @venue.save
       render json: @venue, status: :created, location: @venue
@@ -46,6 +48,6 @@ class Api::VenuesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:name, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng)
+      params.require(:venue).permit(:name, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
     end
 end
