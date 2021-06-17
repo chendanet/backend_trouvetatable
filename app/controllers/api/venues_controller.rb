@@ -16,19 +16,19 @@ class Api::VenuesController < Api::BaseController
   # POST /venues
   def create
     @venue = Venue.new(
-      name: venue.params[:name], 
-      addrress: venue.params[:address], 
-      city: venue.params[:city],
-      price: venue.params[:price],
-      cuisine: venue.params[:cuisine], 
-      category: venue.params[:category],
-      phone_number: venue.params[:phone_number],
-      zipcode: venue.params[:zipcode],
-      description: venue.params[:description],
-      terrace: venue.params[:terrace],
-      seatnumber: venue.params[:seatnumber],
-      lat: venue.params[:lat],
-      lng: venue.params[:lng]
+      name: venue_params[:name], 
+      address: venue_params[:address], 
+      city: venue_params[:city],
+      price: venue_params[:price],
+      cuisine: venue_params[:cuisine], 
+      category: venue_params[:category],
+      phone_number: venue_params[:phone_number],
+      zipcode: venue_params[:zipcode],
+      description: venue_params[:description],
+      terrace: venue_params[:terrace],
+      seatnumber: venue_params[:seatnumber],
+      lat: venue_params[:lat],
+      lng: venue_params[:lng]
       )
     
     @venue.images.attach(venue_params[:images])
