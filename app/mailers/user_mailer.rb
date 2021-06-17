@@ -3,9 +3,11 @@ class UserMailer < ApplicationMailer
 
     def welcome_email(user)
       @user = user
+
+      @url = "trouvetatable.herokuapp.com"
       mail(
         to: @user.email,
-        subject: 'Bienvenue chez Trouvetatable',
+        subject: 'Bienvenue chez Trouvetatable'
       )
     end
 end
