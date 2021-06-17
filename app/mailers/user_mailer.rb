@@ -1,10 +1,10 @@
 class UserMailer < ApplicationMailer
-    default from: 'trouvetatable@yopmail.com'
+    default from: 'trouvetatable@gmail.com'
 
     def welcome_email(user)
       @user = user
 
-      @url = "trouvetatable.herokuapp.com"
+      @url = 'https://trouvetatable.herokuapp.com/'
       mail(
         to: @user.email,
         subject: 'Bienvenue chez Trouvetatable'
