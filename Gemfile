@@ -53,3 +53,4 @@ gem 'jsonapi-rails'
 
 gem 'faker'
 
+gem 'aws-sdk-s3'
