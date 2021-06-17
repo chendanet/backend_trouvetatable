@@ -15,12 +15,26 @@ class Api::VenuesController < Api::BaseController
 
   # POST /venues
   def create
-    @venue = Venue.new() #venue_params
+    @venue = Venue.new(
+      name: venue.params[:name], 
+      addrress: venue.params[:address], 
+      city: venue.params[:city],
+      price: venue.params[:price],
+      cuisine: venue.params[:cuisine], 
+      category: venue.params[:category],
+      phone_number: venue.params[:phone_number],
+      zipcode: venue.params[:zipcode],
+      description: venue.params[:description],
+      terrace: venue.params[:terrace],
+      seatnumber: venue.params[:seatnumber],
+      lat: venue.params[:lat],
+      lng: venue.params[:lng]
+      )
     
     @venue.images.attach(venue_params[:images])
 
     if @venue.save
-      render json: @venue, status: :created, location: @venue
+      render json: @venue, status: :created, location: @api_venue
     else
       render json: @venue.errors, status: :unprocessable_entity
     end
@@ -48,6 +62,6 @@ class Api::VenuesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:name, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
+      params.permit(:name, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
     end
 end
