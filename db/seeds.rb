@@ -342,6 +342,7 @@ venue16 = Venue.create!(
 )
 
 venue17 = Venue.create!(
+    user_id:4,
     name: "Takami Sushi & Robata Restaurant",
     address: "811 Wilshire Blvd",
     city: "Paris",
