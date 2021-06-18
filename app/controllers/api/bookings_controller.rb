@@ -16,13 +16,7 @@ class Api::BookingsController < Api::BaseController
     def create
         @user = current_user    
 
-        @booking = Booking.new(
-            seat: booking_params[:seat], 
-            time: booking_params[:time], 
-            date: booking_params[:date], 
-            venue_id: booking_params[:venue_id], 
-            user_id: @user.id, 
-        )
+        @booking = Booking.new(booking_params)
  
         if @booking.save
             render json: @booking, status: :created
@@ -49,9 +43,9 @@ class Api::BookingsController < Api::BaseController
         @booking = Booking.find(params[:id])
       end
 
-     def booking_params
-        params.permit(:seat, :time, :date, :venue_id, :user_id)
-      end
+    def booking_params
+        params.require(:booking).permit(:seat, :time, :date, :venue_id, :user_id)
+    end
 
       def is_owner 
         @booking= Booking.find(params[:id])
