@@ -1,10 +1,10 @@
 class Api::VenuesController < Api::BaseController
   before_action :set_venue, only: [:show, :update, :destroy]
 
-  # GET /venues
+  
   def index
-    @venues = Venue.all
-
+    @query = Venue.ransack(params[:query])
+    @venues = @query.result
     render json: @venues
   end
 
@@ -53,6 +53,15 @@ class Api::VenuesController < Api::BaseController
   def destroy
     @venue.destroy
   end
+
+  # def search
+  #   if params[:search].blank?  
+  #    return  
+  #   else  
+  #     @results = Venue.ransack(name_cont: params[:q]).result(distinct: true).limit(5)
+  #     render json: @results
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
