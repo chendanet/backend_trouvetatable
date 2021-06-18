@@ -14,7 +14,7 @@ class Api::BookingsController < Api::BaseController
     end
 
     def create
-        @user = currentUser    
+        @user = current_user    
 
         @booking = Booking.new(
             seat: booking_params[:seat], 
