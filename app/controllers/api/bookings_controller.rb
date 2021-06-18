@@ -14,7 +14,7 @@ class Api::BookingsController < Api::BaseController
     end
 
     def create
-        @user = current_user    
+        @user = currentUser    
 
         @booking = Booking.new(
             seat: booking_params[:seat], 
@@ -50,7 +50,7 @@ class Api::BookingsController < Api::BaseController
       end
 
      def booking_params
-        params.require(:booking).permit(:seat, :time, :date, :venue_id, :user_id)
+        params.permit(:seat, :time, :date, :venue_id, :user_id)
       end
 
       def is_owner 
