@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
-  resources :venues
-  devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
+  namespace :api, defaults: { format: :json } do
+    resources :bookings
+    # get 'venues/search', to: 'venues#search'
+    resources :venues
+    resources :users, only: %w[show index update destroy]
+  end
+  devise_for :users,
+  defaults: { format: :json },
+  path: '',
+  path_names: {
+    sign_in: 'api/login',
+    sign_out: 'api/logout',
+    registration: 'api/signup'
+  },
+  controllers: {
+    sessions: 'sessions',
+    registrations: 'registrations'
+  }
+
 end

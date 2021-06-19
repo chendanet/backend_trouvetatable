@@ -1,10 +1,9 @@
-class VenuesController < ApplicationController
+class Api::VenuesController < Api::BaseController
   before_action :set_venue, only: [:show, :update, :destroy]
 
-  # GET /venues
+  
   def index
     @venues = Venue.all
-
     render json: @venues
   end
 
@@ -16,9 +15,11 @@ class VenuesController < ApplicationController
   # POST /venues
   def create
     @venue = Venue.new(venue_params)
+    
+    @venue.images.attach(venue_params[:images])
 
     if @venue.save
-      render json: @venue, status: :created, location: @venue
+      render json: @venue, status: :created, location: @api_venue
     else
       render json: @venue.errors, status: :unprocessable_entity
     end
@@ -38,6 +39,15 @@ class VenuesController < ApplicationController
     @venue.destroy
   end
 
+  # def search
+  #   if params[:search].blank?  
+  #    return  
+  #   else  
+  #     @results = Venue.ransack(name_cont: params[:q]).result(distinct: true).limit(5)
+  #     render json: @results
+  #   end
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_venue
@@ -46,6 +56,6 @@ class VenuesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:name, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng)
+      params.require(:venue).permit(:name, :user_id, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
     end
 end
