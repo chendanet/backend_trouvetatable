@@ -15,21 +15,7 @@ class Api::VenuesController < Api::BaseController
 
   # POST /venues
   def create
-    @venue = Venue.new(
-      name: venue_params[:name], 
-      address: venue_params[:address], 
-      city: venue_params[:city],
-      price: venue_params[:price],
-      cuisine: venue_params[:cuisine], 
-      category: venue_params[:category],
-      phone_number: venue_params[:phone_number],
-      zipcode: venue_params[:zipcode],
-      description: venue_params[:description],
-      terrace: venue_params[:terrace],
-      seatnumber: venue_params[:seatnumber],
-      lat: venue_params[:lat],
-      lng: venue_params[:lng]
-      )
+    @venue = Venue.new(venue_params)
     
     @venue.images.attach(venue_params[:images])
 
@@ -71,6 +57,6 @@ class Api::VenuesController < Api::BaseController
 
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.permit(:name, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
+      params.require(:venue).permit(:name, :user_id, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
     end
 end
