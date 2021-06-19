@@ -1,7 +1,6 @@
 require 'faker'
 
 User.destroy_all
-Venue.destroy_all
 
 
 user1 = User.create!(
