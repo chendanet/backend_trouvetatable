@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
-  has_many :bookings  
-  has_many :venues
+  has_many :bookings, dependent: :destroy
+  has_many :venues, dependent: :destroy
   
     after_create :welcome_send
 
