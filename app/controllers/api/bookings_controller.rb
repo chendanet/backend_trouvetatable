@@ -1,8 +1,8 @@
 class Api::BookingsController < Api::BaseController
     before_action :set_booking, only: [:show, :update, :destroy]
-    # before_action :authenticate_user!, only: [:create, :update, :destroy]
-    # before_action :is_owner , only: [:edit, :update, :destroy]
-
+    before_action :authenticate_user!, only: [:create, :update, :destroy]
+    before_action :is_owner , only: [:edit, :update, :destroy]
+    
     def index
         @bookings = Booking.all
     
