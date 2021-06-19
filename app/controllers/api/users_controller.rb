@@ -1,5 +1,5 @@
 class Api::UsersController < Api::BaseController
-    # before_action :find_user, only: [:show, :update]
+    before_action :find_user, only: [:show, :update]
     # before_action :authenticate_user!, except: [:show, :index]   
 
     def create

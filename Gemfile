@@ -49,8 +49,6 @@ gem 'devise-jwt'
 
 gem 'rack-cors'
 
-gem 'ransack'
-
 gem 'jsonapi-rails'
 
 gem 'faker'

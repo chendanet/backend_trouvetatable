@@ -3,8 +3,7 @@ class Api::VenuesController < Api::BaseController
 
   
   def index
-    @query = Venue.ransack(params[:query])
-    @venues = @query.result
+    @venues = Venue.all
     render json: @venues
   end
 
