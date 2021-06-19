@@ -6,7 +6,7 @@ class Api::BookingsController < Api::BaseController
     def index
         @bookings = Booking.all
     
-        render json: @bookings.to_json
+        render json: @bookings.to_json(include:[:venue])
     end
 
     def show
