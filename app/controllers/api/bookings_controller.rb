@@ -10,7 +10,7 @@ class Api::BookingsController < Api::BaseController
     end
 
     def show
-        render json: @booking.to_json
+        render json: @booking.to_json(include: [:venue])
     end
 
     def create
