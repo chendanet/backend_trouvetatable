@@ -1,5 +1,5 @@
 class Api::BookingsController < Api::BaseController
-    # before_action :set_booking, only: [:show, :update, :destroy]
+    before_action :set_booking, only: [:show, :update, :destroy]
     # before_action :authenticate_user!, only: [:create, :update, :destroy]
     # before_action :is_owner , only: [:edit, :update, :destroy]
 
@@ -10,7 +10,7 @@ class Api::BookingsController < Api::BaseController
     end
 
     def show
-        render json: @booking.to_json(include: [:venue])
+        render json: @booking.to_json(include:[:venue])
     end
 
     def create
@@ -40,7 +40,7 @@ class Api::BookingsController < Api::BaseController
 
     def set_booking
         @booking = Booking.find(params[:id])
-      end
+    end
 
     def booking_params
         params.require(:booking).permit(:seat, :time, :date, :venue_id, :user_id)
