@@ -3,7 +3,7 @@ class Api::VenuesController < Api::BaseController
 
   
   def index
-    @venues = @venue.all
+    @venues = Venue.all
     render json: @venues
   end
 
