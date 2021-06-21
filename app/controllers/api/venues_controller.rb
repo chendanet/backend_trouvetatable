@@ -1,7 +1,7 @@
 class Api::VenuesController < Api::BaseController
   before_action :set_venue, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [ :create, :update, :destroy]
 
-  
   def index
     @venues = Venue.all
     render json: @venues
@@ -15,7 +15,7 @@ class Api::VenuesController < Api::BaseController
   # POST /venues
   def create
     @venue = Venue.new(venue_params)
-    
+    @venue.user_id = current_user.id
     @venue.images.attach(venue_params[:images])
 
     if @venue.save
@@ -53,9 +53,9 @@ class Api::VenuesController < Api::BaseController
     def set_venue
       @venue = Venue.find(params[:id])
     end
-
+    
     # Only allow a list of trusted parameters through.
     def venue_params
-      params.require(:venue).permit(:name, :user_id, :address, :city, :price, :cuisine, :category, :phone_number, :zipcode, :description, :terrace, :seatnumber, :lat, :lng, images: [])
+      params.permit(:name, :city, :address, :zipcode, :price, :cuisine, :phone_number, :terrace, :seatnumber, :description, :user_id, images: [])
     end
 end
