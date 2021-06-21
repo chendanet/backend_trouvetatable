@@ -10,5 +10,11 @@ class UserMailer < ApplicationMailer
         subject: 'Bienvenue chez Trouvetatable'
       )
     end
+
+    def forgot_password_email(user)
+      @user = user
+      @url  = 'http://localhost:3000/password/reset'
+      mail(to: @user.email, subject: 'Bienvenue chez nous !')
+    end
 end
   
