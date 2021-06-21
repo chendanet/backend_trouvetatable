@@ -1,7 +1,6 @@
 class Api::VenuesController < Api::BaseController
   before_action :set_venue, only: [:show, :update, :destroy]
   before_action :authenticate_user!, only: [ :create, :update, :destroy]
-  before_action :check_if_manager, only: [:update, :destroy]
 
   def index
     @venues = Venue.all
@@ -28,15 +27,11 @@ class Api::VenuesController < Api::BaseController
       description: venue_params[:description]
     )
     @venue.user_id = current_user.id
-    puts "\nLes premiers params sont ok !\n"
     @venue.images.attach(venue_params[:images])
-    puts "\nLes images sont ok !\n"
     if @venue.save
       render json: @venue, status: :created, location: @api_venue
-      puts "\n C'est censé rendre le JSON ! \n"
     else
       render json: @venue.errors, status: :unprocessable_entity
-      puts "\n La ça marche pas! \n"
     end
   end
 
@@ -69,12 +64,6 @@ class Api::VenuesController < Api::BaseController
       @venue = Venue.find(params[:id])
     end
     
-    def check_if_manager
-      unless current_user && current_user.id == @venue.user_id
-        render json: {success: false, error: "You can't modify this venue"}, status: 401
-      end
-    end
-
     # Only allow a list of trusted parameters through.
     def venue_params
       params.permit(:name, :city, :address, :zipcode, :price, :cuisine, :phone_number, :terrace, :seatnumber, :description, :user_id, images: [])
