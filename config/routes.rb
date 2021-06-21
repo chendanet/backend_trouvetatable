@@ -20,4 +20,7 @@ Rails.application.routes.draw do
     registrations: 'registrations'
   }
 
+  resources :password, only: [:index]
+  post 'password/forgot', to: 'password#forgot'
+  post 'password/reset', to: 'password#reset'
 end
