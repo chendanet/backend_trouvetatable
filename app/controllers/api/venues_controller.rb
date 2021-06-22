@@ -4,12 +4,27 @@ class Api::VenuesController < Api::BaseController
 
   def index
     @venues = Venue.all
-    render json: @venues
+    json = @venues.to_a.map! do | venue |
+      venue.as_json.merge({
+        images: venue.images.attachments.map do | attachment |
+          url_for(attachment)
+        end,
+      })
+    end
+
+    render json: json
   end
 
   # GET /venues/1
   def show
-    render json: @venue
+    json = @venue.as_json.merge({
+        images: @venue.images.attachments.map do | attachment |
+          url_for(attachment)
+        end,
+        user: @venue.user.as_json,
+      })
+      
+    render json: json
   end
 
   # POST /venues
