@@ -28,11 +28,6 @@ class Api::BookingsController < Api::BaseController
         end    
      end
     
-#  after_create :reservation_confirmation
-
-#   def reservation_confirmation
-#     UserMailer.reservation_confirmation(self).deliver_now
-#   end
 
     def update
         if @booking.update(booking_params)
