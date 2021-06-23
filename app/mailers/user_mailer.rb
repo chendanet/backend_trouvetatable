@@ -13,9 +13,14 @@ class UserMailer < ApplicationMailer
 
     def forgot_password_email(user)
       @user = user
-      # @url  = 'http://localhost:3000/password/reset'
       @url  = 'https://trouve-ta-table.herokuapp.com/password/reset'
       mail(to: @user.email, subject: 'Bienvenue chez nous !')
+    end
+
+    def reservation_confirmation(user)
+      @user = User.find(user)
+      @url  = 'https://trouve-ta-table.herokuapp.com/profile'
+      mail(to: @user.email, subject: 'Votre reservation a bien ete prise en compte!')
     end
 end
   

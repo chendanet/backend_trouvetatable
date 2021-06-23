@@ -3,6 +3,8 @@ class Api::BookingsController < Api::BaseController
     before_action :authenticate_user!, only: [:create, :update, :destroy]
     before_action :is_owner , only: [:edit, :update, :destroy]
     
+
+
     def index
         @bookings = Booking.all
     
@@ -14,15 +16,23 @@ class Api::BookingsController < Api::BaseController
     end
 
     def create
-       
+
         @booking = Booking.new(booking_params)
- 
+        UserMailer.reservation_confirmation(current_user.id).deliver_now
+
         if @booking.save
             render json: @booking, status: :created
+
         else
             render json: @booking.errors, status: :unprocessable_entity
         end    
      end
+    
+#  after_create :reservation_confirmation
+
+#   def reservation_confirmation
+#     UserMailer.reservation_confirmation(self).deliver_now
+#   end
 
     def update
         if @booking.update(booking_params)
