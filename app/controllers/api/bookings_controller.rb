@@ -18,9 +18,9 @@ class Api::BookingsController < Api::BaseController
     def create
 
         @booking = Booking.new(booking_params)
-        UserMailer.reservation_confirmation(current_user.id).deliver_now
 
         if @booking.save
+            UserMailer.reservation_confirmation(current_user.id).deliver_now
             render json: @booking, status: :created
 
         else
