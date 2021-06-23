@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :bookings
+    resources :ratings
+
     # get 'venues/search', to: 'venues#search'
     resources :venues
     resources :users, only: %w[show index update destroy]
