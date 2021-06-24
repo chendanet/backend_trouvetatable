@@ -5,6 +5,7 @@ class User < ApplicationRecord
         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_many :bookings, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :venues, dependent: :destroy
   
     after_create :welcome_send

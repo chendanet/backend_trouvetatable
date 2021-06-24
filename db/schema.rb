@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_135559) do
+ActiveRecord::Schema.define(version: 2021_06_23_111143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,17 @@ ActiveRecord::Schema.define(version: 2021_06_21_135559) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "score"
+    t.text "review"
+    t.bigint "user_id", null: false
+    t.bigint "venue_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+    t.index ["venue_id"], name: "index_ratings_on_venue_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -102,5 +113,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_135559) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "users"
   add_foreign_key "bookings", "venues"
+  add_foreign_key "ratings", "users"
+  add_foreign_key "ratings", "venues"
   add_foreign_key "venues", "users"
 end
